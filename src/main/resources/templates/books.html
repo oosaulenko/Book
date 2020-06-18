@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+    <div align="center">
+        <h1>Library</h1>
+        <a href="/books/new">Create New Book</a>
+        <br/><br/>
+        <form method="post" action="/books">
+            <input type="text" name="title" placeholder="Enter book title">
+            <button>Find</button>
+
+        </form>
+        <br/>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Book title</th>
+                <th>Author</th>
+                <th>Year Create</th>
+                <th>Discipline</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${listBook}">
+                <td th:text="${book.id}">id</td>
+                <td th:text="${book.booktitle}">Book title</td>
+                <td th:text="${book.author}">Author</td>
+                <td th:text="${book.publishYear}">Year Create</td>
+                <td th:text="${book.discipline}">Discipline</td>
+                <td>
+                    <a th:href="@{'/books/edit/' + ${book.id}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/books/delete/' + ${book.id}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
